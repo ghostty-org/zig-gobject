@@ -17,6 +17,9 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
+      - name: Variables
+        run: set
+        
       - name: Version
         id: version
         run: echo "version=$(TZ=UTC date +%Y-%m-%d)-${{ github.run_number }}" >> $GITHUB_OUTPUT
