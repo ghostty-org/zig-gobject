@@ -99,6 +99,7 @@
                 alias gh = ^${pkgs.lib.getExe pkgs.gh}
                 alias ln = ^${pkgs.uutils-coreutils}/bin/uutils-ln
                 alias readlink = ^${pkgs.uutils-coreutils}/bin/uutils-readlink
+                alias gzip = ^${pkgs.lib.getExe pkgs.gzip}
               ''
               (builtins.readFile ./release.nu)
             ];
