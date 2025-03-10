@@ -1,6 +1,8 @@
 const std = @import("std");
 
 pub fn build(b: *std.Build) void {
+    const version = b.option([]const u8, "version", "version number");
+
     const zig_gobject_dep = b.dependency(
         "zig_gobject",
         .{
@@ -52,6 +54,6 @@ pub fn build(b: *std.Build) void {
     b.installDirectory(.{
         .source_dir = output,
         .install_dir = .{ .custom = "" },
-        .install_subdir = "bindings",
+        .install_subdir = if (version) |v| b.fmt("ghostty-gobject-{s}", .{v}) else "ghostty-gobject",
     });
 }

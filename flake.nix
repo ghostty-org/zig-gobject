@@ -35,10 +35,11 @@
         devShells.default = pkgs.mkShell {
           name = "ghostty-gobject";
           nativeBuildInputs = [
-            pkgs.zig_0_13
-            pkgs.libxslt
-            pkgs.libxml2
             pkgs.alejandra
+            pkgs.libxml2
+            pkgs.libxslt
+            pkgs.nodePackages.prettier
+            pkgs.zig_0_13
           ];
           shellHook = ''
             export GIR_PATH="${pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_paths}"
