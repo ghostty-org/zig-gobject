@@ -1,0 +1,22 @@
+.{
+    .name = "ghostty-gobject",
+
+    .version = "0.1.0",
+
+    .minimum_zig_version = "0.13.0",
+
+    .dependencies = .{
+        .zig_gobject = .{
+            .url = "https://github.com/ianprime0509/zig-gobject/archive/e459534e05f40b536568a8b20394d7c06e441c98.tar.gz",
+            .hash = "12206cc206e9c206768d5813460cd0646a59fb395aff281cf8da2b026e1ec56b0828",
+        },
+    },
+
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "gir-fixes",
+        "LICENSE",
+        "README.md",
+    },
+}
