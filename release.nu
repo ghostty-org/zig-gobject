@@ -15,7 +15,7 @@ let run_attempt = if not ($env | get -i GITHUB_RUN_ATTEMPT | is-empty) {
 let version = {ts: $ts, run_number: $run_number, run_attempt: $run_attempt} | format pattern "{ts}-{run_number}-{run_attempt}"
 
 let directory = $"ghostty-gobject-($version)"
-let tarfile = $"ghostty-gobject-($version).tar.zstd"
+let tarfile = $"ghostty-gobject-($version).tar.gz"
 
 let tmpdir = mktemp --directory
 
