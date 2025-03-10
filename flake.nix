@@ -36,6 +36,8 @@
           name = "ghostty-gobject";
           nativeBuildInputs = [
             pkgs.alejandra
+            pkgs.gh
+            pkgs.gnutar
             pkgs.libxml2
             pkgs.libxslt
             pkgs.nodePackages.prettier

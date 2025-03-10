@@ -19,31 +19,15 @@ jobs:
 
       - name: Version
         id: version
-        run: echo "::set-output name=version::$(TZ=UTC date +%Y-%m-d)-${{ github.run_number }}"
+        run: echo "version=$(TZ=UTC date +%Y-%m-%d)-${{ github.run_number }}" >> $GITHUB_OUTPUT
 
       - name: Build
         run: nix develop -c zig build -Dversion=${{ steps.version.outputs.version }}
 
       - name: Create Tarball
-        run: tar --verbose --create --file ghostty-gobject-${{ steps.version.outputs.version}}.tar.zst --directory zig-out ghostty-gobject-${{ steps.version.outputs.version}}
+        run: nix develop -c tar --verbose --create --file ghostty-gobject-${{ steps.version.outputs.version}}.tar.zst --directory zig-out ghostty-gobject-${{ steps.version.outputs.version}}
 
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        with:
-          draft: false
-          prerelease: false
-          release_name: ${{ steps.version.outputs.version }}
-          tag_name: ${{ steps.version.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
-
-      - name: Upload Artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ghostty-gobject-${{ steps.version.outputs.version}}.tar.zst
-          asset_name: ghostty-gobject-${{ steps.version.outputs.version}}.tar.zst
-          asset_content_type: application/x-zstd-compressed-tar
+        run: nix develop -c gh release create ${{ steps.version.outputs.version }} --latest --title ${{ steps.version.outputs.version }} ./ghostty-gobject-${{ steps.version.outputs.version}}.tar.zst
