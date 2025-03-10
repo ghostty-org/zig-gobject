@@ -1,13 +1,13 @@
 let ts = date now | format date "%Y-%m-%d"
 
-let run_number = if not ($env | get -i RUN_NUMBER | is-empty) {
-  $env.RUN_NUMBER | into int
+let run_number = if not ($env | get -i GITHUB_RUN_NUMBER | is-empty) {
+  $env.GITHUB_RUN_NUMBER | into int
 } else {
   0
 }
 
-let run_attempt = if not ($env | get -i RUN_ATTEMPT | is-empty) {
-  $env.RUN_ATTEMPT | into int
+let run_attempt = if not ($env | get -i GITHUB_RUN_ATTEMPT | is-empty) {
+  $env.GITHUB_RUN_ATTEMPT | into int
 } else {
   0
 }
@@ -19,7 +19,7 @@ let tarfile = $"ghostty-gobject-($version).tar.zstd"
 
 let tmpdir = mktemp --directory
 
-nix build -L .#default
+nix build .#default
 
 ln -s $"(readlink result)/ghostty-gobject" $"($tmpdir)/($directory)"
 
