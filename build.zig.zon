@@ -1,14 +1,16 @@
 .{
-    .name = "ghostty-gobject",
+    .name = .ghostty_gobject,
 
-    .version = "0.1.0",
+    .version = "0.2.0",
 
-    .minimum_zig_version = "0.13.0",
+    .fingerprint = 0xfd1e6c3df1b84d9d,
+
+    .minimum_zig_version = "0.14.0",
 
     .dependencies = .{
         .zig_gobject = .{
-            .url = "https://github.com/jcollie/zig-gobject/archive/e493c8540d76d66a7e77a73add7303e6aa606c50.tar.gz",
-            .hash = "1220b1c2f5b126bd0fcbddb63d4f70135d7279b10aa8d5c732478fff87eef44fdd63",
+            .url = "https://github.com/ianprime0509/zig-gobject/archive/1f11f093ddb07ab333c7ae03b4fc8ad5456934b3.tar.gz",
+            .hash = "gobject_codegen-0.2.2-B33qzby7BgB8fsoAiF7N5dKEHGNd7t48tvQ44M1EXnOR",
         },
     },
 

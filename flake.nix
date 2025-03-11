@@ -47,7 +47,7 @@
             pkgs.libxml2
             pkgs.libxslt
             pkgs.nodePackages.prettier
-            pkgs.zig_0_13
+            pkgs.zig_0_14
             zig2nix.packages.${system}.zon2nix
           ];
           shellHook = ''
@@ -55,13 +55,13 @@
           '';
         };
         packages.default = let
-          zig_hook = pkgs.zig_0_13.hook.overrideAttrs {
+          zig_hook = pkgs.zig_0_14.hook.overrideAttrs {
             zig_default_flags = "--color off";
           };
         in
           pkgs.stdenv.mkDerivation (finalAttrs: {
             pname = "ghostty-gobject";
-            version = "0.1.0";
+            version = "0.2.0";
             src = pkgs.lib.fileset.toSource {
               root = ./.;
               fileset = pkgs.lib.fileset.intersection (pkgs.lib.fileset.fromSource (pkgs.lib.sources.cleanSource ./.)) (
@@ -94,12 +94,14 @@
               ''
                 #!${pkgs.lib.getExe pkgs.nushell}
 
+                alias zig = ^${pkgs.lib.getExe pkgs.zig_0_14}
                 alias nix = ^${pkgs.lib.getExe pkgs.nix}
                 alias tar = ^${pkgs.lib.getExe pkgs.gnutar}
                 alias gh = ^${pkgs.lib.getExe pkgs.gh}
                 alias ln = ^${pkgs.uutils-coreutils}/bin/uutils-ln
                 alias readlink = ^${pkgs.uutils-coreutils}/bin/uutils-readlink
                 alias gzip = ^${pkgs.lib.getExe pkgs.gzip}
+                alias zstd = ^${pkgs.lib.getExe pkgs.zstd}
               ''
               (builtins.readFile ./release.nu)
             ];

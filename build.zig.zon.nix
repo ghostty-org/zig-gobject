@@ -89,19 +89,19 @@ let
 in
 linkFarm name [
   {
-    name = "1220b1c2f5b126bd0fcbddb63d4f70135d7279b10aa8d5c732478fff87eef44fdd63";
+    name = "gobject_codegen-0.2.2-B33qzby7BgB8fsoAiF7N5dKEHGNd7t48tvQ44M1EXnOR";
     path = fetchZigArtifact {
       name = "zig_gobject";
-      url = "https://github.com/jcollie/zig-gobject/archive/e493c8540d76d66a7e77a73add7303e6aa606c50.tar.gz";
-      hash = "sha256-pjz83c7jx6KdNXj07NEN8XVgKCQE/UL4JJ2zMNNpvPg=";
+      url = "https://github.com/ianprime0509/zig-gobject/archive/1f11f093ddb07ab333c7ae03b4fc8ad5456934b3.tar.gz";
+      hash = "sha256-ckZxgYziKXW9rIS7R1xV43SOm8L9sr00VoRTWxhy2vI=";
     };
   }
   {
-    name = "1220bb518b3fa657bb6b857a0b706e06012ca0b78ade85b90796a32d4c96b0c18185";
+    name = "xml-0.1.0-ZTbP3_47AgClPn_55oc3J5FaewBcphmzZifp-vLd5WpG";
     path = fetchZigArtifact {
       name = "xml";
-      url = "git+https://github.com/ianprime0509/zig-xml?ref=main#836821974ef608b23991c0602a5986f08939d88c";
-      hash = "sha256-nrKBoMAa0DRTROoT59GneGX83jRAjCeLdBtc62sM+O0=";
+      url = "git+https://github.com/ianprime0509/zig-xml?ref=main#7c1697f35065ab54088d268ef52abf4c53dc7d62";
+      hash = "sha256-u31MXnl7gdQn0P78wt4l4+mGY15LxMx1KRv7kFL/d68=";
     };
   }
 ]
