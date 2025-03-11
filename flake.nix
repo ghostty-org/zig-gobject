@@ -40,18 +40,22 @@
       in {
         devShells.default = pkgs.mkShell {
           name = "ghostty-gobject";
-          nativeBuildInputs = [
-            pkgs.alejandra
-            pkgs.gh
-            pkgs.gnutar
-            pkgs.libxml2
-            pkgs.libxslt
-            pkgs.nodePackages.prettier
-            pkgs.zig_0_14
-            zig2nix.packages.${system}.zon2nix
-          ];
+          packages =
+            [
+              pkgs.alejandra
+              pkgs.gh
+              pkgs.gnutar
+              pkgs.libxml2
+              pkgs.libxslt
+              pkgs.nodePackages.prettier
+              pkgs.pkg-config
+              pkgs.zig_0_14
+              zig2nix.packages.${system}.zon2nix
+            ]
+            ++ gir_path;
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath gir_path;
           shellHook = ''
-            export GIR_PATH="${pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path}"
+            export GIR_PATH=${pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path}
           '';
         };
         packages.default = let
@@ -76,10 +80,11 @@
             deps = pkgs.callPackage ./build.zig.zon.nix {
               name = "${finalAttrs.pname}-cache-${finalAttrs.version}";
             };
-            GIR_PATH = "${pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path}";
+            GIR_PATH = pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path;
             nativeBuildInputs = [
               zig_hook
               pkgs.libxslt
+              pkgs.pkg-config
             ];
             zigBuildFlags = [
               "--system"
