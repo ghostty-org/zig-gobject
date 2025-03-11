@@ -19,7 +19,7 @@ let version = {zig_version: $zig_version, ts: $ts, run_number: $run_number, run_
 let directory = $"ghostty-gobject-($version)"
 let tarfile = $"ghostty-gobject-($version).tar"
 let targzfile = $"ghostty-gobject-($version).tar.gz"
-let tarzstdfile = $"ghostty-gobject-($version).tar.zstd"
+let tarzstdfile = $"ghostty-gobject-($version).tar.zst"
 
 let tmpdir = mktemp --directory
 
