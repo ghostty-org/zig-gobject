@@ -84,7 +84,6 @@
             nativeBuildInputs = [
               zig_hook
               pkgs.libxslt
-              pkgs.pkg-config
             ];
             zigBuildFlags = [
               "--system"
