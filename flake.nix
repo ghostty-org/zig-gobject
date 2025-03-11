@@ -40,28 +40,32 @@
       in {
         devShells.default = pkgs.mkShell {
           name = "ghostty-gobject";
-          nativeBuildInputs = [
-            pkgs.alejandra
-            pkgs.gh
-            pkgs.gnutar
-            pkgs.libxml2
-            pkgs.libxslt
-            pkgs.nodePackages.prettier
-            pkgs.zig_0_13
-            zig2nix.packages.${system}.zon2nix
-          ];
+          packages =
+            [
+              pkgs.alejandra
+              pkgs.gh
+              pkgs.gnutar
+              pkgs.libxml2
+              pkgs.libxslt
+              pkgs.nodePackages.prettier
+              pkgs.pkg-config
+              pkgs.zig_0_14
+              zig2nix.packages.${system}.zon2nix
+            ]
+            ++ gir_path;
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath gir_path;
           shellHook = ''
-            export GIR_PATH="${pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path}"
+            export GIR_PATH=${pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path}
           '';
         };
         packages.default = let
-          zig_hook = pkgs.zig_0_13.hook.overrideAttrs {
+          zig_hook = pkgs.zig_0_14.hook.overrideAttrs {
             zig_default_flags = "--color off";
           };
         in
           pkgs.stdenv.mkDerivation (finalAttrs: {
             pname = "ghostty-gobject";
-            version = "0.1.0";
+            version = "0.2.0";
             src = pkgs.lib.fileset.toSource {
               root = ./.;
               fileset = pkgs.lib.fileset.intersection (pkgs.lib.fileset.fromSource (pkgs.lib.sources.cleanSource ./.)) (
@@ -76,10 +80,11 @@
             deps = pkgs.callPackage ./build.zig.zon.nix {
               name = "${finalAttrs.pname}-cache-${finalAttrs.version}";
             };
-            GIR_PATH = "${pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path}";
+            GIR_PATH = pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path;
             nativeBuildInputs = [
               zig_hook
               pkgs.libxslt
+              pkgs.pkg-config
             ];
             zigBuildFlags = [
               "--system"
@@ -94,12 +99,14 @@
               ''
                 #!${pkgs.lib.getExe pkgs.nushell}
 
+                alias zig = ^${pkgs.lib.getExe pkgs.zig_0_14}
                 alias nix = ^${pkgs.lib.getExe pkgs.nix}
                 alias tar = ^${pkgs.lib.getExe pkgs.gnutar}
                 alias gh = ^${pkgs.lib.getExe pkgs.gh}
                 alias ln = ^${pkgs.uutils-coreutils}/bin/uutils-ln
                 alias readlink = ^${pkgs.uutils-coreutils}/bin/uutils-readlink
                 alias gzip = ^${pkgs.lib.getExe pkgs.gzip}
+                alias zstd = ^${pkgs.lib.getExe pkgs.zstd}
               ''
               (builtins.readFile ./release.nu)
             ];

@@ -1,13 +1,12 @@
 const std = @import("std");
+const builtin = @import("builtin");
 
 pub fn build(b: *std.Build) void {
     const version = b.option([]const u8, "version", "version number");
 
     const zig_gobject_dep = b.dependency(
         "zig_gobject",
-        .{
-            .target = b.host,
-        },
+        .{},
     );
 
     const translate_gir_exe = zig_gobject_dep.artifact("translate-gir");
@@ -16,7 +15,7 @@ pub fn build(b: *std.Build) void {
 
     const output = translate_gir_run.addPrefixedOutputDirectoryArg("--output-dir=", "bindings");
 
-    translate_gir_run.addPrefixedDirectorySourceArg("--gir-fixes-dir=", b.path("gir-fixes"));
+    translate_gir_run.addPrefixedDirectoryArg("--gir-fixes-dir=", b.path("gir-fixes"));
     {
         const gir_fixes_path = b.pathFromRoot("gir-fixes");
         var gir_fixes_dir = std.fs.openDirAbsolute(gir_fixes_path, .{ .iterate = true }) catch unreachable;
@@ -32,9 +31,9 @@ pub fn build(b: *std.Build) void {
         }
     }
 
-    translate_gir_run.addPrefixedDirectorySourceArg("--gir-fixes-dir=", zig_gobject_dep.path("gir-fixes"));
-    translate_gir_run.addPrefixedDirectorySourceArg("--bindings-dir=", zig_gobject_dep.path("binding-overrides"));
-    translate_gir_run.addPrefixedDirectorySourceArg("--extensions-dir=", zig_gobject_dep.path("extensions"));
+    translate_gir_run.addPrefixedDirectoryArg("--gir-fixes-dir=", zig_gobject_dep.path("gir-fixes"));
+    translate_gir_run.addPrefixedDirectoryArg("--bindings-dir=", zig_gobject_dep.path("binding-overrides"));
+    translate_gir_run.addPrefixedDirectoryArg("--extensions-dir=", zig_gobject_dep.path("extensions"));
 
     if (std.posix.getenv("GIR_PATH")) |gir_path| {
         var it = std.mem.splitScalar(u8, gir_path, ':');
@@ -57,6 +56,9 @@ pub fn build(b: *std.Build) void {
     b.installDirectory(.{
         .source_dir = output,
         .install_dir = .{ .custom = "" },
-        .install_subdir = if (version) |v| b.fmt("ghostty-gobject-{s}", .{v}) else "ghostty-gobject",
+        .install_subdir = if (version) |v|
+            b.fmt("ghostty-gobject-{s}-{s}", .{ builtin.zig_version_string, v })
+        else
+            b.fmt("ghostty-gobject-{s}", .{builtin.zig_version_string}),
     });
 }
