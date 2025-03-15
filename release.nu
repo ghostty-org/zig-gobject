@@ -27,7 +27,7 @@ nix build .#default
 
 ln -s $"(readlink result)/ghostty-gobject-($zig_version)" $"($tmpdir)/($directory)"
 
-tar --create --dereference --directory $tmpdir --file $"($tmpdir)/($tarfile)" $directory
+tar --create --dereference --mode u+w --directory $tmpdir --file $"($tmpdir)/($tarfile)" $directory
 
 open $"($tmpdir)/($tarfile)" | gzip -c | save --raw $"($tmpdir)/($targzfile)"
 open $"($tmpdir)/($tarfile)" | zstd -c | save --raw $"($tmpdir)/($tarzstdfile)"
