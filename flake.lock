@@ -20,11 +20,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1741513245,
-        "narHash": "sha256-7rTAMNTY1xoBwz0h7ZMtEcd8LELk9R5TzBPoHuhNSCk=",
+        "lastModified": 1741851582,
+        "narHash": "sha256-cPfs8qMccim2RBgtKGF+x9IBCduRvd/N5F4nYpU0TVE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e3e32b642a31e6714ec1b712de8c91a3352ce7e1",
+        "rev": "6607cf789e541e7873d40d3a8f7815ea92204f32",
         "type": "github"
       },
       "original": {
@@ -38,7 +38,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
-        "zig2nix": "zig2nix"
+        "zon2nix": "zon2nix"
       }
     },
     "systems": {
@@ -56,7 +56,7 @@
         "type": "github"
       }
     },
-    "zig2nix": {
+    "zon2nix": {
       "inputs": {
         "flake-utils": [
           "flake-utils"
@@ -66,16 +66,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1738200422,
-        "narHash": "sha256-j/dY8ofcbB9qNpSBVQJwb4SQyHZ6hPuoJEEhk8Sue+Q=",
+        "lastModified": 1741992168,
+        "narHash": "sha256-LBlffoQ/CFNEudZ6h1V3jdP0icN2kGbVgraJnLKySIE=",
         "owner": "jcollie",
-        "repo": "zig2nix",
-        "rev": "382054eeb4f5eb945ad680590da694c7c91f693c",
+        "repo": "zon2nix",
+        "rev": "e626a6f501069e55ce3874a63527ddf867728ac8",
         "type": "github"
       },
       "original": {
         "owner": "jcollie",
-        "repo": "zig2nix",
+        "ref": "e626a6f501069e55ce3874a63527ddf867728ac8",
+        "repo": "zon2nix",
         "type": "github"
       }
     }

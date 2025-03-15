@@ -8,8 +8,8 @@
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
-    zig2nix = {
-      url = "github:jcollie/zig2nix";
+    zon2nix = {
+      url = "github:jcollie/zon2nix?ref=e626a6f501069e55ce3874a63527ddf867728ac8";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
@@ -18,7 +18,7 @@
   outputs = {
     nixpkgs,
     flake-utils,
-    zig2nix,
+    zon2nix,
     ...
   }: let
   in
@@ -50,7 +50,7 @@
               pkgs.nodePackages.prettier
               pkgs.pkg-config
               pkgs.zig_0_14
-              zig2nix.packages.${system}.zon2nix
+              zon2nix.packages.${system}.zon2nix
             ]
             ++ gir_path;
           LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath gir_path;
