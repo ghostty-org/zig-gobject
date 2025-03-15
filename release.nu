@@ -32,8 +32,6 @@ tar --create --dereference --mode u=rwX,og=rX --owner root:0 --group root:0 --di
 open $"($tmpdir)/($gobject_tarfile)" | gzip -c | save --raw $"($tmpdir)/($gobject_targzfile)"
 open $"($tmpdir)/($gobject_tarfile)" | zstd -c | save --raw $"($tmpdir)/($gobject_tarzstdfile)"
 
-let gir_path = $env.GIR_PATH | split row ':'
-
 let gir_dir = $"ghostty-gir-($version)"
 let gir_tarfile = $"ghostty-gir-($version).tar"
 let gir_targzfile = $"ghostty-gir-($version).tar.gz"

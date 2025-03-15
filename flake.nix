@@ -106,6 +106,8 @@
                 alias readlink = ^${pkgs.uutils-coreutils}/bin/uutils-readlink
                 alias gzip = ^${pkgs.lib.getExe pkgs.gzip}
                 alias zstd = ^${pkgs.lib.getExe pkgs.zstd}
+
+                let gir_path = [ ${builtins.replaceStrings [":"] [" "] (pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path)} ]
               ''
               (builtins.readFile ./release.nu)
             ];
