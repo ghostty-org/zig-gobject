@@ -36,6 +36,7 @@
           pkgs.harfbuzz
           pkgs.libadwaita
           pkgs.pango
+          pkgs.librsvg
         ];
       in {
         devShells.default = pkgs.mkShell {

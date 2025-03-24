@@ -52,6 +52,7 @@ pub fn build(b: *std.Build) void {
     translate_gir_run.addArg("Gsk-4.0");
     translate_gir_run.addArg("Gtk-4.0");
     translate_gir_run.addArg("Pango-1.0");
+    translate_gir_run.addArg("Rsvg-2.0");
 
     b.installDirectory(.{
         .source_dir = output,
