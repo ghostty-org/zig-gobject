@@ -35,6 +35,8 @@
           pkgs.gtk4
           pkgs.harfbuzz
           pkgs.libadwaita
+          pkgs.libpanel
+          pkgs.libportal
           pkgs.pango
           pkgs.librsvg
         ];
@@ -55,9 +57,7 @@
             ]
             ++ gir_path;
           LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath gir_path;
-          shellHook = ''
-            export GIR_PATH=${pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path}
-          '';
+          GIR_PATH = pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path;
         };
         packages.default = let
           zig_hook = pkgs.zig_0_14.hook.overrideAttrs {
