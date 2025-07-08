@@ -37,6 +37,7 @@
           pkgs.libadwaita
           pkgs.libpanel
           pkgs.libportal
+          pkgs.libportal-gtk4
           pkgs.pango
           pkgs.librsvg
         ];
