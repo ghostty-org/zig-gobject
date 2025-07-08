@@ -99,11 +99,11 @@ linkFarm name [
     };
   }
   {
-    name = "gobject_codegen-0.2.2-B33qzby7BgB8fsoAiF7N5dKEHGNd7t48tvQ44M1EXnOR";
+    name = "gobject_codegen-0.3.0-B33qzcnGBgCE8DVJQUVQlruIuN2OFTDDZVL4Q1Fvgbx8";
     path = fetchZigArtifact {
       name = "zig_gobject";
-      url = "https://github.com/ianprime0509/zig-gobject/archive/1f11f093ddb07ab333c7ae03b4fc8ad5456934b3.tar.gz";
-      hash = "sha256-ckZxgYziKXW9rIS7R1xV43SOm8L9sr00VoRTWxhy2vI=";
+      url = "https://github.com/ianprime0509/zig-gobject/archive/d7f1edaf50193d49b56c60568dfaa9f23195565b.tar.gz";
+      hash = "sha256-9JiLGC+mHtLDuiUN6gXi8HINyJw2ppxfcAu9xOYD6KE=";
     };
   }
 ]
