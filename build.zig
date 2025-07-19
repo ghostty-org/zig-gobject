@@ -4,12 +4,12 @@ const builtin = @import("builtin");
 pub fn build(b: *std.Build) void {
     const version = b.option([]const u8, "version", "version number");
 
-    const zig_gobject_dep = b.dependency(
-        "zig_gobject",
+    const gobject_codegen_dep = b.dependency(
+        "gobject_codegen",
         .{},
     );
 
-    const translate_gir_exe = zig_gobject_dep.artifact("translate-gir");
+    const translate_gir_exe = gobject_codegen_dep.artifact("translate-gir");
 
     const translate_gir_run = b.addRunArtifact(translate_gir_exe);
 
@@ -31,9 +31,9 @@ pub fn build(b: *std.Build) void {
         }
     }
 
-    translate_gir_run.addPrefixedDirectoryArg("--gir-fixes-dir=", zig_gobject_dep.path("gir-fixes"));
-    translate_gir_run.addPrefixedDirectoryArg("--bindings-dir=", zig_gobject_dep.path("binding-overrides"));
-    translate_gir_run.addPrefixedDirectoryArg("--extensions-dir=", zig_gobject_dep.path("extensions"));
+    translate_gir_run.addPrefixedDirectoryArg("--gir-fixes-dir=", gobject_codegen_dep.path("gir-fixes"));
+    translate_gir_run.addPrefixedDirectoryArg("--bindings-dir=", gobject_codegen_dep.path("binding-overrides"));
+    translate_gir_run.addPrefixedDirectoryArg("--extensions-dir=", gobject_codegen_dep.path("extensions"));
 
     if (std.posix.getenv("GIR_PATH")) |gir_path| {
         var it = std.mem.splitScalar(u8, gir_path, ':');

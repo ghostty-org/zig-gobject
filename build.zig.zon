@@ -8,9 +8,9 @@
     .minimum_zig_version = "0.14.0",
 
     .dependencies = .{
-        .zig_gobject = .{
-            .url = "https://github.com/ianprime0509/zig-gobject/archive/d7f1edaf50193d49b56c60568dfaa9f23195565b.tar.gz",
-            .hash = "gobject_codegen-0.3.0-B33qzcnGBgCE8DVJQUVQlruIuN2OFTDDZVL4Q1Fvgbx8",
+        .gobject_codegen = .{
+            .url = "https://github.com/ianprime0509/zig-gobject/archive/7c75f1bd99477531828550bcedbddfe1a48ef41d.tar.gz",
+            .hash = "gobject_codegen-0.3.0-B33qzQTvBgDuOkkZetmeWleJtXNkdkrokceDDEOFUcWT",
         },
     },
 
