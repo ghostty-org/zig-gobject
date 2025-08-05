@@ -91,11 +91,11 @@ let
 in
 linkFarm name [
   {
-    name = "gobject_codegen-0.3.0-B33qzd7xBgAbAc31d_zGRJAfojSSM9cVZHevcwhtN4eu";
+    name = "gobject_codegen-0.3.0-B33qzSHyBgCsO6uA-EjNfHeW7n8F0AISOYS5NU5KnH_h";
     path = fetchZigArtifact {
       name = "gobject_codegen";
-      url = "https://github.com/jcollie/zig-gobject/archive/ce669393bed6fdb3cd632bd482585137749881be.tar.gz";
-      hash = "sha256-XU5Rg4/vfSga9KNF8lnFQsjtRWzrNLyQRWKpsB7Qjm0=";
+      url = "https://github.com/jcollie/zig-gobject/archive/52ac6900eafc24cb2c18dac3f980dc2e3d77c5a5.tar.gz";
+      hash = "sha256-/OKmqODKpN4IqPOmaMb8AdgSp7ZQLox5B462yXNjeZ8=";
     };
   }
   {
