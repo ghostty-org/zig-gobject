@@ -12,6 +12,38 @@
     </xsl:copy>
   </xsl:template>
 
+  <xsl:template match="core:callback[@c:type='GClosureNotify']/core:parameters/core:parameter[@name='closure']/core:type">
+    <!-- https://github.com/ianprime0509/zig-gobject/issues/33 -->
+    <xsl:copy>
+      <xsl:attribute name="name">gpointer</xsl:attribute>
+      <xsl:attribute name="c:type">gpointer</xsl:attribute>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="core:function[@c:identifier='g_cclosure_new']/core:parameters/core:parameter[@name='destroy_data'] |
+                       core:function[@c:identifier='g_cclosure_new_swap']/core:parameters/core:parameter[@name='destroy_data']">
+    <!-- https://github.com/ianprime0509/zig-gobject/issues/77 -->
+    <xsl:copy>
+      <xsl:attribute name="nullable">1</xsl:attribute>
+
+      <xsl:copy-of select="@* | node()" />
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="core:function[@c:identifier='g_enum_register_static']/core:parameters/core:parameter[@name='const_static_values']/core:type">
+    <!-- https://github.com/ianprime0509/zig-gobject/issues/104 -->
+    <core:array c:type="const GEnumValue*">
+      <core:type name="EnumValue" c:type="GEnumValue"/>
+    </core:array>
+  </xsl:template>
+
+  <xsl:template match="core:function[@c:identifier='g_flags_register_static']/core:parameters/core:parameter[@name='const_static_values']/core:type">
+    <!-- https://github.com/ianprime0509/zig-gobject/issues/104 -->
+    <core:array c:type="const GFlagsValue*">
+      <core:type name="FlagsValue" c:type="GFlagsValue"/>
+    </core:array>
+  </xsl:template>
+
   <xsl:template match="core:record[@name='WeakRef']/core:method[@name='get']/core:return-value">
      <xsl:copy>
        <xsl:attribute name="nullable">1</xsl:attribute>
