@@ -20,11 +20,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1751811536,
-        "narHash": "sha256-UNWg2jGZX8G/y9yM8d85nK/zBCw6msaXC6sUsDTc/cc=",
-        "rev": "29e290002bfff26af1db6f64d070698019460302",
+        "lastModified": 1756546090,
+        "narHash": "sha256-13UnuLRKa+iYRFROhRQQaR29xdxwObJKwJkIZ9pk4WM=",
+        "rev": "41d292bfc37309790f70f4c120b79280ce40af16",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/25.05/nixos-25.05.805852.29e290002bff/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/25.05/nixos-25.05.809091.41d292bfc373/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
