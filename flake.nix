@@ -29,6 +29,7 @@
         };
         gir_path = [
           pkgs.gdk-pixbuf
+          pkgs.gexiv2
           pkgs.glib
           pkgs.gobject-introspection
           pkgs.graphene
