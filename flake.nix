@@ -53,8 +53,9 @@
               pkgs.libxml2
               pkgs.libxslt
               pkgs.nodePackages.prettier
+              pkgs.pinact
               pkgs.pkg-config
-              pkgs.zig_0_14
+              pkgs.zig_0_15
               zon2nix.packages.${system}.zon2nix
             ]
             ++ gir_path;
@@ -62,13 +63,13 @@
           GIR_PATH = pkgs.lib.strings.makeSearchPathOutput "dev" "share/gir-1.0" gir_path;
         };
         packages.default = let
-          zig_hook = pkgs.zig_0_14.hook.overrideAttrs {
+          zig_hook = pkgs.zig_0_15.hook.overrideAttrs {
             zig_default_flags = "--color off";
           };
         in
           pkgs.stdenv.mkDerivation (finalAttrs: {
             pname = "ghostty-gobject";
-            version = "0.2.0";
+            version = "0.5.0";
             src = pkgs.lib.fileset.toSource {
               root = ./.;
               fileset = pkgs.lib.fileset.intersection (pkgs.lib.fileset.fromSource (pkgs.lib.sources.cleanSource ./.)) (
@@ -101,7 +102,7 @@
               ''
                 #!${pkgs.lib.getExe pkgs.nushell}
 
-                alias zig = ^${pkgs.lib.getExe pkgs.zig_0_14}
+                alias zig = ^${pkgs.lib.getExe pkgs.zig_0_15}
                 alias nix = ^${pkgs.lib.getExe pkgs.nix}
                 alias tar = ^${pkgs.lib.getExe pkgs.gnutar}
                 alias gh = ^${pkgs.lib.getExe pkgs.gh}
