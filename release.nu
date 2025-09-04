@@ -30,7 +30,7 @@ let gir_tarzstdfile = $"ghostty-gir-($version).tar.zst"
 
 mkdir $"($tmpdir)/($gir_dir)"
 
-$gir_path | each {|dir| ls $dir | filter {|file| $file.name | path parse | $in.extension == "gir"} | each {|file| cp $file.name $"($tmpdir)/($gir_dir)"}} | ignore
+$gir_path | each {|dir| ls $dir | where {|file| $file.name | path parse | $in.extension == "gir"} | each {|file| cp $file.name $"($tmpdir)/($gir_dir)"}} | ignore
 
 tar --create --dereference --mode u=rwX,og=rX --owner root:0 --group root:0 --directory $tmpdir --file $"($tmpdir)/($gir_tarfile)" $gir_dir
 
