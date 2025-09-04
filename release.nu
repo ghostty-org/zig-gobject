@@ -2,17 +2,8 @@ let zig_version = zig version
 
 let ts = date now | format date "%Y-%m-%d"
 
-let run_number = if not ($env | get -i GITHUB_RUN_NUMBER | is-empty) {
-  $env.GITHUB_RUN_NUMBER | into int
-} else {
-  0
-}
-
-let run_attempt = if not ($env | get -i GITHUB_RUN_ATTEMPT | is-empty) {
-  $env.GITHUB_RUN_ATTEMPT | into int
-} else {
-  0
-}
+let run_number = $env.GITHUB_RUN_NUMBER? | default 0 | into int
+let run_attempt = $env.GITHUB_RUN_ATTEMPT? | default 0 | into int
 
 let version = {zig_version: $zig_version, ts: $ts, run_number: $run_number, run_attempt: $run_attempt} | format pattern "{zig_version}-{ts}-{run_number}-{run_attempt}"
 
