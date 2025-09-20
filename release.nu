@@ -1,11 +1,9 @@
-let zig_version = zig version
-
 let ts = date now | format date "%Y-%m-%d"
 
 let run_number = $env.GITHUB_RUN_NUMBER? | default 0 | into int
 let run_attempt = $env.GITHUB_RUN_ATTEMPT? | default 0 | into int
 
-let version = {zig_version: $zig_version, ts: $ts, run_number: $run_number, run_attempt: $run_attempt} | format pattern "{zig_version}-{ts}-{run_number}-{run_attempt}"
+let version = {ts: $ts, run_number: $run_number, run_attempt: $run_attempt} | format pattern "{ts}-{run_number}-{run_attempt}"
 
 let gobject_dir = $"ghostty-gobject-($version)"
 let gobject_tarfile = $"ghostty-gobject-($version).tar"
@@ -14,9 +12,9 @@ let gobject_tarzstdfile = $"ghostty-gobject-($version).tar.zst"
 
 let tmpdir = mktemp --directory
 
-nix build .#default
+let result = nix build --print-out-paths --no-link .#default
 
-ln -s $"(readlink result)/ghostty-gobject-($zig_version)" $"($tmpdir)/($gobject_dir)"
+ln -s $"(result)" $"($tmpdir)/($gobject_dir)"
 
 tar --create --dereference --mode u=rwX,og=rX --owner root:0 --group root:0 --directory $tmpdir --file $"($tmpdir)/($gobject_tarfile)" $gobject_dir
 

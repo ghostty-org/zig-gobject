@@ -2,8 +2,6 @@ const std = @import("std");
 const builtin = @import("builtin");
 
 pub fn build(b: *std.Build) void {
-    const version = b.option([]const u8, "version", "version number");
-
     const gobject_codegen_dep = b.dependency(
         "gobject_codegen",
         .{},
@@ -61,9 +59,6 @@ pub fn build(b: *std.Build) void {
     b.installDirectory(.{
         .source_dir = output,
         .install_dir = .{ .custom = "" },
-        .install_subdir = if (version) |v|
-            b.fmt("ghostty-gobject-{s}-{s}", .{ builtin.zig_version_string, v })
-        else
-            b.fmt("ghostty-gobject-{s}", .{builtin.zig_version_string}),
+        .install_subdir = "",
     });
 }
