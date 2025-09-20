@@ -14,7 +14,7 @@ let tmpdir = mktemp --directory
 
 let result = nix build --print-out-paths --no-link .#default
 
-ln -s $"(result)" $"($tmpdir)/($gobject_dir)"
+ln -s $"($result)" $"($tmpdir)/($gobject_dir)"
 
 tar --create --dereference --mode u=rwX,og=rX --owner root:0 --group root:0 --directory $tmpdir --file $"($tmpdir)/($gobject_tarfile)" $gobject_dir
 
