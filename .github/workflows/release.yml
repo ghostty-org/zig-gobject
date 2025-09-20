@@ -33,4 +33,4 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           MINISIGN_KEY: ${{ secrets.MINISIGN_KEY }}
           MINISIGN_PASSWORD: ${{ secrets.MINISIGN_PASSWORD }}
-        run: nix run .#release
+        run: nix develop -c zig build gh-release -Ddate=$(date +%Y-%m-%d) -Drun-number=${{ github.run_number }} -Drun-attempt=${{ github.run_attempt }}
