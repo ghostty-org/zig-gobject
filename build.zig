@@ -125,7 +125,7 @@ pub fn build(b: *std.Build) !void {
         }
 
         {
-            const name = b.fmt("ghostty-gobject-{s}.tar.zstd", .{version});
+            const name = b.fmt("ghostty-gobject-{s}.tar.zst", .{version});
             const create_gobject_tarzstd = b.addSystemCommand(&.{ "zstd", "-c" });
             create_gobject_tarzstd.addFileArg(gobject_tar);
             const stdout = create_gobject_tarzstd.captureStdOut();
@@ -178,7 +178,7 @@ pub fn build(b: *std.Build) !void {
         }
 
         {
-            const name = b.fmt("ghostty-gir-{s}.tar.zstd", .{version});
+            const name = b.fmt("ghostty-gir-{s}.tar.zst", .{version});
             const create_gir_tarzstd = b.addSystemCommand(&.{ "zstd", "-c" });
             create_gir_tarzstd.addFileArg(gir_tar);
             const stdout = create_gir_tarzstd.captureStdOut();
