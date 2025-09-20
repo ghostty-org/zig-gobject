@@ -48,11 +48,11 @@ $env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gir_tarzstdfile)" -s $"($t
     --title $version
     --notes $version
     $"($tmpdir)/($gobject_targzfile)"
-    $"($tmpdir)/($gobject_targzfile).minisign"
+    $"($tmpdir)/($gobject_targzfile).minisig"
     $"($tmpdir)/($gobject_tarzstdfile)"
-    $"($tmpdir)/($gobject_tarzstdfile).minisign"
+    $"($tmpdir)/($gobject_tarzstdfile).minisig"
     $"($tmpdir)/($gir_targzfile)"
-    $"($tmpdir)/($gir_targzfile).minisign"
+    $"($tmpdir)/($gir_targzfile).minisig"
     $"($tmpdir)/($gir_tarzstdfile)"
-    $"($tmpdir)/($gir_tarzstdfile).minisign"
+    $"($tmpdir)/($gir_tarzstdfile).minisig"
 )
