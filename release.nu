@@ -16,7 +16,7 @@ let result = nix build --print-out-paths --no-link .#default
 
 ln -s $"($result)" $"($tmpdir)/($gobject_dir)"
 
-tar --create --dereference --mode u=rwX,og=rX --owner root:0 --group root:0 --directory $tmpdir --file $"($tmpdir)/($gobject_tarfile)" $gobject_dir
+tar --create --dereference --mtime 1970-01-01T00:00:00+00:00 --mode u=rwX,og=rX --owner root:0 --group root:0 --directory $tmpdir --file $"($tmpdir)/($gobject_tarfile)" $gobject_dir
 
 open $"($tmpdir)/($gobject_tarfile)" | gzip -c | save --raw $"($tmpdir)/($gobject_targzfile)"
 open $"($tmpdir)/($gobject_tarfile)" | zstd -c | save --raw $"($tmpdir)/($gobject_tarzstdfile)"
