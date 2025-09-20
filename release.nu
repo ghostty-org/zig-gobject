@@ -35,4 +35,24 @@ tar --create --dereference --mode u=rwX,og=rX --owner root:0 --group root:0 --di
 open $"($tmpdir)/($gir_tarfile)" | gzip -c | save --raw $"($tmpdir)/($gir_targzfile)"
 open $"($tmpdir)/($gir_tarfile)" | zstd -c | save --raw $"($tmpdir)/($gir_tarzstdfile)"
 
-gh release create $version --latest --title $version --notes $version $"($tmpdir)/($gobject_targzfile)" $"($tmpdir)/($gobject_tarzstdfile)" $"($tmpdir)/($gir_targzfile)" $"($tmpdir)/($gir_tarzstdfile)"
+$env.MINISIGN_KEY | save --raw $"($tmpdir)/minisign.key"
+
+$env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gobject_targzfile)" -s $"($tmpdir)/minisign.key"
+$env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gobject_tarzstdfile)" -s $"($tmpdir)/minisign.key"
+$env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gir_targzfile)" -s $"($tmpdir)/minisign.key"
+$env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gir_tarzstdfile)" -s $"($tmpdir)/minisign.key"
+
+(
+  gh release create $version
+    --latest
+    --title $version
+    --notes $version
+    $"($tmpdir)/($gobject_targzfile)"
+    $"($tmpdir)/($gobject_targzfile).minisign"
+    $"($tmpdir)/($gobject_tarzstdfile)"
+    $"($tmpdir)/($gobject_tarzstdfile).minisign"
+    $"($tmpdir)/($gir_targzfile)"
+    $"($tmpdir)/($gir_targzfile).minisign"
+    $"($tmpdir)/($gir_tarzstdfile)"
+    $"($tmpdir)/($gir_tarzstdfile).minisign"
+)

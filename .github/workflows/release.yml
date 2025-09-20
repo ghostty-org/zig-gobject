@@ -31,4 +31,6 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          MINISIGN_KEY: ${{ secrets.MINISIGN_KEY }}
+          MINISIGN_PASSWORD: ${{ secrets.MINISIGN_PASSWORD }}
         run: nix run .#release
