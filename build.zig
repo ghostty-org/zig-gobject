@@ -193,8 +193,8 @@ pub fn build(b: *std.Build) !void {
 
     minisign: {
         const wf = b.addWriteFiles();
-        const minisign_key = wf.add("minisign.key", b.fmt("\n{s}\n", .{minisign_key_ orelse break :minisign}));
-        const minisign_password = wf.add("minisign.password", b.fmt("{s}", .{minisign_password_ orelse break :minisign}));
+        const minisign_key = wf.add("minisign.key", minisign_key_ orelse break :minisign);
+        const minisign_password = wf.add("minisign.password", minisign_password_ orelse break :minisign);
 
         for (files_to_sign.items) |item| {
             const name = b.fmt("{s}.minisig", .{item.name});
@@ -225,9 +225,11 @@ pub fn build(b: *std.Build) !void {
             version,
         },
     );
+
     for (artifacts.items) |lp| {
         gh.addFileArg(lp);
     }
+
     const release_step = b.step("gh-release", "create a GitHub release");
     release_step.dependOn(&gh.step);
 }
