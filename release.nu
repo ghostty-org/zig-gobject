@@ -37,10 +37,10 @@ open $"($tmpdir)/($gir_tarfile)" | zstd -c | save --raw $"($tmpdir)/($gir_tarzst
 
 $env.MINISIGN_KEY | save $"($tmpdir)/minisign.key"
 
-$env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gobject_targzfile)" -s $"($tmpdir)/minisign.key"
-$env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gobject_tarzstdfile)" -s $"($tmpdir)/minisign.key"
-$env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gir_targzfile)" -s $"($tmpdir)/minisign.key"
-$env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gir_tarzstdfile)" -s $"($tmpdir)/minisign.key"
+$"($env.MINISIGN_PASSWORD | str trim)\n" | minisign -S -m $"($tmpdir)/($gobject_targzfile)" -s $"($tmpdir)/minisign.key"
+$"($env.MINISIGN_PASSWORD | str trim)\n" | minisign -S -m $"($tmpdir)/($gobject_tarzstdfile)" -s $"($tmpdir)/minisign.key"
+$"($env.MINISIGN_PASSWORD | str trim)\n" | minisign -S -m $"($tmpdir)/($gir_targzfile)" -s $"($tmpdir)/minisign.key"
+$"($env.MINISIGN_PASSWORD | str trim)\n" | minisign -S -m $"($tmpdir)/($gir_tarzstdfile)" -s $"($tmpdir)/minisign.key"
 
 (
   gh release create $version
