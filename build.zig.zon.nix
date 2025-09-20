@@ -47,10 +47,7 @@ let
       url_without_query = builtins.elemAt (lib.splitString "?" url_base) 0;
       rev_base = builtins.elemAt parts 1;
       rev =
-        if builtins.match "^[a-fA-F0-9]{40}$" rev_base != null then
-          rev_base
-        else
-          "refs/heads/${rev_base}";
+        if builtins.match "^[a-fA-F0-9]{40}$" rev_base != null then rev_base else "refs/heads/${rev_base}";
     in
     fetchgit {
       inherit name rev hash;
