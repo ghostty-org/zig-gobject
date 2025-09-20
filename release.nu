@@ -32,18 +32,18 @@ $gir_path | each {|dir| ls $dir | where {|file| $file.name | path parse | $in.ex
 
 tar --create --dereference --mode u=rwX,og=rX --owner root:0 --group root:0 --directory $tmpdir --file $"($tmpdir)/($gir_tarfile)" $gir_dir
 
-open $"($tmpdir)/($gir_tarfile)" | gzip -c | save --raw $"($tmpdir)/($gir_targzfile)"
-open $"($tmpdir)/($gir_tarfile)" | zstd -c | save --raw $"($tmpdir)/($gir_tarzstdfile)"
+open --raw $"($tmpdir)/($gir_tarfile)" | gzip -c | save --raw $"($tmpdir)/($gir_targzfile)"
+open --raw $"($tmpdir)/($gir_tarfile)" | zstd -c | save --raw $"($tmpdir)/($gir_tarzstdfile)"
 
 $env.MINISIGN_KEY | str trim | save $"($tmpdir)/minisign.key"
 "\n" | save --append $"($tmpdir)/minisign.key"
 $env.MINISIGN_PASSWORD | str trim | save $"($tmpdir)/minisign.password"
 "\n" | save --append $"($tmpdir)/minisign.password"
 
-open $"($tmpdir)/minisign.password" | minisign -S -m $"($tmpdir)/($gobject_targzfile)" -s $"($tmpdir)/minisign.key"
-open $"($tmpdir)/minisign.password" | minisign -S -m $"($tmpdir)/($gobject_tarzstdfile)" -s $"($tmpdir)/minisign.key"
-open $"($tmpdir)/minisign.password" | minisign -S -m $"($tmpdir)/($gir_targzfile)" -s $"($tmpdir)/minisign.key"
-open $"($tmpdir)/minisign.password" | minisign -S -m $"($tmpdir)/($gir_tarzstdfile)" -s $"($tmpdir)/minisign.key"
+open --raw $"($tmpdir)/minisign.password" | minisign -S -m $"($tmpdir)/($gobject_targzfile)" -s $"($tmpdir)/minisign.key"
+open --raw $"($tmpdir)/minisign.password" | minisign -S -m $"($tmpdir)/($gobject_tarzstdfile)" -s $"($tmpdir)/minisign.key"
+open --raw $"($tmpdir)/minisign.password" | minisign -S -m $"($tmpdir)/($gir_targzfile)" -s $"($tmpdir)/minisign.key"
+open --raw $"($tmpdir)/minisign.password" | minisign -S -m $"($tmpdir)/($gir_tarzstdfile)" -s $"($tmpdir)/minisign.key"
 
 (
   gh release create $version
