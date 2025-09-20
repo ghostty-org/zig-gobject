@@ -35,7 +35,7 @@ tar --create --dereference --mode u=rwX,og=rX --owner root:0 --group root:0 --di
 open $"($tmpdir)/($gir_tarfile)" | gzip -c | save --raw $"($tmpdir)/($gir_targzfile)"
 open $"($tmpdir)/($gir_tarfile)" | zstd -c | save --raw $"($tmpdir)/($gir_tarzstdfile)"
 
-$env.MINISIGN_KEY | save --raw $"($tmpdir)/minisign.key"
+$env.MINISIGN_KEY | save $"($tmpdir)/minisign.key"
 
 $env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gobject_targzfile)" -s $"($tmpdir)/minisign.key"
 $env.MINISIGN_PASSWORD | minisign -S -m $"($tmpdir)/($gobject_tarzstdfile)" -s $"($tmpdir)/minisign.key"
