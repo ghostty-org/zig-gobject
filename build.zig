@@ -1,5 +1,6 @@
 const std = @import("std");
 const builtin = @import("builtin");
+const app_version = @import("build.zig.zon").version;
 
 pub fn build(b: *std.Build) !void {
     const minisign_key_ = std.posix.getenv("MINISIGN_KEY");
@@ -7,7 +8,7 @@ pub fn build(b: *std.Build) !void {
     const date = b.option([]const u8, "date", "date") orelse "1970-01-01";
     const run_number = b.option([]const u8, "run-number", "run-rumber") orelse "0";
     const run_attempt = b.option([]const u8, "run-attempt", "run-attempt") orelse "0";
-    const version = b.fmt("{s}-{s}-{s}", .{ date, run_number, run_attempt });
+    const version = b.fmt("{s}-{s}-{s}-{s}", .{ app_version, date, run_number, run_attempt });
 
     const gobject_codegen_dep = b.dependency(
         "gobject_codegen",
@@ -76,6 +77,7 @@ pub fn build(b: *std.Build) !void {
     translate_gir_run.addArg("Gio-2.0");
     translate_gir_run.addArg("Gsk-4.0");
     translate_gir_run.addArg("Gtk-4.0");
+    translate_gir_run.addArg("Nautilus-4.0");
     translate_gir_run.addArg("Panel-1");
     translate_gir_run.addArg("Pango-1.0");
     translate_gir_run.addArg("Rsvg-2.0");
