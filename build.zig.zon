@@ -1,7 +1,7 @@
 .{
     .name = .ghostty_gobject,
 
-    .version = "0.6.0",
+    .version = "0.7.0",
 
     .fingerprint = 0xfd1e6c3df1b84d9d,
 
@@ -9,8 +9,8 @@
 
     .dependencies = .{
         .gobject_codegen = .{
-            .url = "https://github.com/ianprime0509/zig-gobject/archive/05a0439fc61b8d3746ce2d30ec65cd3e2fdc907d.tar.gz",
-            .hash = "gobject_codegen-0.3.0-B33qzaJIBwDg1eZ56L-ZjDbI6lapI28CCMXEFhDKpz2P",
+            .url = "https://github.com/ianprime0509/zig-gobject/archive/e5795f47d5dca9540d952c22625dbb4924d6915a.tar.gz",
+            .hash = "gobject_codegen-0.3.0-B33qzQhGBwConuGVhjM7_vBkpmcxzWNGLxx1D-3psi1Y",
         },
     },
 

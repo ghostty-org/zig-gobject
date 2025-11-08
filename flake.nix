@@ -3,7 +3,8 @@
 
   inputs = {
     nixpkgs = {
-      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+      # url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+      url = "github:NixOS/nixpkgs/staging-next";
     };
     zon2nix = {
       url = "github:jcollie/zon2nix?ref=728e15a05e8f48765a64f74d5720ec0a2567fe95";

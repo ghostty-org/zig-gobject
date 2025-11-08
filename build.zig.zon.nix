@@ -47,12 +47,16 @@ let
       url_without_query = builtins.elemAt (lib.splitString "?" url_base) 0;
       rev_base = builtins.elemAt parts 1;
       rev =
-        if builtins.match "^[a-fA-F0-9]{40}$" rev_base != null then rev_base else "refs/heads/${rev_base}";
+        if builtins.match "^[a-fA-F0-9]{40}$" rev_base != null then
+          rev_base
+        else
+          "refs/heads/${rev_base}";
     in
     fetchgit {
       inherit name rev hash;
       url = url_without_query;
       deepClone = false;
+      fetchSubmodules = false;
     };
 
   fetchZigArtifact =
@@ -88,11 +92,11 @@ let
 in
 linkFarm name [
   {
-    name = "gobject_codegen-0.3.0-B33qzaJIBwDg1eZ56L-ZjDbI6lapI28CCMXEFhDKpz2P";
+    name = "gobject_codegen-0.3.0-B33qzQhGBwConuGVhjM7_vBkpmcxzWNGLxx1D-3psi1Y";
     path = fetchZigArtifact {
       name = "gobject_codegen";
-      url = "https://github.com/ianprime0509/zig-gobject/archive/05a0439fc61b8d3746ce2d30ec65cd3e2fdc907d.tar.gz";
-      hash = "sha256-zoqXGruGfNmbUdK2nifc6YBd34l398SlOKFfkeMaWuE=";
+      url = "https://github.com/ianprime0509/zig-gobject/archive/e5795f47d5dca9540d952c22625dbb4924d6915a.tar.gz";
+      hash = "sha256-k4q+h8jS/ZOz9wpvfn8+coUwzH1WTeFv6NoposcD6oM=";
     };
   }
   {
