@@ -9,19 +9,18 @@
       url = "github:jcollie/zon2nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zig = {
-      url = "github:mitchellh/zig-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
     nixpkgs,
     zon2nix,
-    zig,
     ...
   }: let
-    platforms = nixpkgs.lib.attrNames zig.packages;
+    platforms = [
+      "aarch64-darwin"
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
     makePackages = system:
       import nixpkgs {
         inherit system;
@@ -63,7 +62,7 @@
               pkgs.nix-prefetch-git
               pkgs.pinact
               pkgs.pkg-config
-              zig.packages.${pkgs.stdenv.hostPlatform.system}."0.16.0"
+              pkgs.zig_0_16
               zon2nix.packages.${pkgs.stdenv.hostPlatform.system}.zon2nix
             ]
             ++ gir_path;

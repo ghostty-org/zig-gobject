@@ -1,11 +1,8 @@
 .{
     .name = .ghostty_gobject,
-
-    .version = "0.8.0",
-
+    .version = "0.9.0",
     .fingerprint = 0xfd1e6c3df1b84d9d,
-
-    .minimum_zig_version = "0.16.0-dev.3153+d6f43caad",
+    .minimum_zig_version = "0.16.0",
 
     .dependencies = .{
         .gobject_codegen = .{
