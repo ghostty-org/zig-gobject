@@ -73,12 +73,14 @@ pub fn build(b: *std.Build) !void {
 
     translate_gir_run.addArg("Adw-1");
     translate_gir_run.addArg("GLib-2.0");
+    translate_gir_run.addArg("GLibUnix-2.0");
     translate_gir_run.addArg("GObject-2.0");
     translate_gir_run.addArg("Gdk-4.0");
     translate_gir_run.addArg("GdkWayland-4.0");
     translate_gir_run.addArg("GdkX11-4.0");
     translate_gir_run.addArg("GExiv2-0.10");
     translate_gir_run.addArg("Gio-2.0");
+    translate_gir_run.addArg("GioUnix-2.0");
     translate_gir_run.addArg("Gsk-4.0");
     translate_gir_run.addArg("Gtk-4.0");
     translate_gir_run.addArg("Nautilus-4.1");
