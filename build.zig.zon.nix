@@ -23,10 +23,11 @@ let
       ''
         # workaround https://codeberg.org/ziglang/zig/issues/31866
         # https://github.com/Cloudef/zig2nix/issues/54
-        touch "$TMPDIR/build.zig"
-        hash="$(cd "$TMPDIR" && zig fetch --global-cache-dir "$TMPDIR" ${artifact})"
-        mv "$TMPDIR/p/$hash.tar.gz" "$out"
-        chmod 755 "$out"
+        mkdir "$TMPDIR/src" "$TMPDIR/cache"
+        touch "$TMPDIR/src/build.zig"
+        hash="$(cd "$TMPDIR/src" && zig fetch --global-cache-dir "$TMPDIR/cache" ${artifact})"
+        mkdir "$out"
+        tar zxvf "$TMPDIR/cache/p/$hash.tar.gz" --directory "$out/" --strip-components=1
       '';
 
   fetchZig =
@@ -103,11 +104,11 @@ let
 in
 linkFarm name [
   {
-    name = "gobject_codegen-0.3.1-B33qzdB-BwCJT3fq5N2TIeoLDjTCymXQfKR_aCZQhOej";
+    name = "gobject_codegen-0.3.2-B33qze9dBwADTdlnHCsWLNyZvSAWilRL2914S_f8PjJp";
     path = fetchZigArtifact {
       name = "gobject_codegen";
-      url = "git+https://github.com/jcollie/zig-gobject#c59c96a61318a246acb80af60637e48dd96841fb";
-      hash = "sha256-Vm2Sy84n24azQ3MnuQ42avfS/giE4OBW6KtMj5nqwNA=";
+      url = "git+https://github.com/jcollie/zig-gobject.git#410b1d5bca8a0b494aeb1edaad695ac86ac40d54";
+      hash = "sha256-cx4AHZkwJ8JNhaSE6Pf1dhcOT6SVFdBcpb1nAhX+3AQ=";
       unpack = true;
     };
   }
