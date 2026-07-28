@@ -104,11 +104,11 @@ let
 in
 linkFarm name [
   {
-    name = "gobject_codegen-0.3.2-B33qze9dBwADTdlnHCsWLNyZvSAWilRL2914S_f8PjJp";
+    name = "gobject_codegen-0.3.2-B33qzZ1pBwC7ulKgo4kpT7CqnAsih1cEfIHxBaB5fa8t";
     path = fetchZigArtifact {
       name = "gobject_codegen";
-      url = "git+https://github.com/jcollie/zig-gobject.git#410b1d5bca8a0b494aeb1edaad695ac86ac40d54";
-      hash = "sha256-cx4AHZkwJ8JNhaSE6Pf1dhcOT6SVFdBcpb1nAhX+3AQ=";
+      url = "git+https://github.com/jcollie/zig-gobject.git#4393d28d25cd6d04b71851731656d51caea73eb9";
+      hash = "sha256-eA+wIanhNAi9oyUtO1d6tyWMARG1/8+4M9Craa7Nf8c=";
       unpack = true;
     };
   }
