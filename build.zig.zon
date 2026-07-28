@@ -6,8 +6,8 @@
 
     .dependencies = .{
         .gobject_codegen = .{
-            .url = "git+https://github.com/jcollie/zig-gobject#9858f4c9843abebbda403fab9f1493fd8e805420",
-            .hash = "gobject_codegen-0.3.2-B33qzQBqBwBRLDZy5fodjIJzyZyPjudt7_9vorC1hv7i",
+            .url = "git+https://github.com/jcollie/zig-gobject#4173c667dc908e9e133953af7a375923560e4563",
+            .hash = "gobject_codegen-0.3.2-B33qzQ9qBwCJn6zRYQNutCtioRDoVdI7crr2IhAIKCN9",
         },
     },
 
