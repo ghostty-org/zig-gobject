@@ -25,10 +25,10 @@ pub fn build(b: *std.Build) !void {
 
     const bindings = translate_gir_run.addPrefixedOutputDirectoryArg("--output-dir=", "bindings");
 
-    translate_gir_run.addPrefixedDirectoryArg("--gir-fixes-dir=", b.path("gir-fixes"));
-    {
+    gir_fixes: {
         const gir_fixes_path = b.pathFromRoot("gir-fixes");
-        var gir_fixes_dir = std.Io.Dir.openDirAbsolute(io, gir_fixes_path, .{ .iterate = true }) catch unreachable;
+        var gir_fixes_dir = std.Io.Dir.openDirAbsolute(io, gir_fixes_path, .{ .iterate = true }) catch break :gir_fixes;
+        translate_gir_run.addPrefixedDirectoryArg("--gir-fixes-dir=", b.path("gir-fixes"));
         var it = gir_fixes_dir.iterate();
         while (it.next(io) catch unreachable) |entry| {
             switch (entry.kind) {
